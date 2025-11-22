@@ -1,0 +1,37 @@
+@startuml
+    !include <logos/mysql>
+    !include <logos/redis>
+    !include <logos/rabbitmq>
+    !include <logos/php>
+    !include <logos/nodejs>
+
+    title Architecture: Product Service & Review Processing Service
+
+    actor user as "User"
+    database Storage as DB <<$mysql>>
+    rectangle "Redis Cache" as REDIS <<$redis>>
+    queue "Message Queue" as MQ <<$rabbitmq>>
+    rectangle "Product Service" as PS <<$php>>
+
+    frame "Review Processing Service Instances (scalable)" {
+        node "Review Processor #1" as RP1 <<$nodejs>>
+        node "Review Processor #2" as RP2 <<$nodejs>>
+        node "Review Processor N..." as RPN <<$nodejs>>
+    }
+
+    user -d-> PS : REST API calls
+
+    PS --> DB : Read/write product data\n Read reviews data
+    PS --> MQ : Publish review events
+    PS -right-> REDIS : App cache
+
+    MQ ..> RP1 : review events
+    MQ ..> RP2 : review events
+    MQ ..> RPN : review events
+
+     RP1 --> DB
+     RP2 --> DB
+     RPN --> DB
+
+
+@enduml
