@@ -1,0 +1,18 @@
+App\Domain\Product:
+  type: entity
+  table: product
+  id:
+    id:
+      type: uuid
+      generator:
+        strategy: NONE
+  fields:
+    name:
+      type: string
+      length: 255
+    description:
+      type: string
+      nullable: true
+      length: 255
+    price:
+      type: float
