@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Bus\Query;
 
-interface QueryBus
+interface QueryBusInterface
 {
-    public function ask(Query $query) : Response|null;
+    public function ask(QueryInterface $query) : ResponseInterface|null;
 }
