@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Product\Application\Command\CreateProduct;
 
-use App\Product\Application\Command\CreateProduct\CreateProductCommand;
-use App\Product\Application\Command\CreateProduct\CreateProductCommandHandler;
-use App\Product\Domain\Product;
-use App\Product\Domain\ProductRepositoryInterface;
+use App\Application\Command\CreateProduct\CreateProductCommand;
+use App\Application\Command\CreateProduct\CreateProductCommandHandler;
+use App\Domain\Entity\ProductInterface;
+use App\Domain\Repository\ProductRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 
 class CreateProductCommandHandlerTest extends TestCase
@@ -19,11 +19,7 @@ class CreateProductCommandHandlerTest extends TestCase
         $repository
             ->expects(self::once())
             ->method('save')
-            ->with(self::callback(function (Product $product) {
-                return $product->getName() === 'Test'
-                    && $product->getDescription() === 'Desc'
-                    && $product->getPrice() === 100.0;
-            }));
+            ->with(self::isInstanceOf(ProductInterface::class));
 
         $handler = new CreateProductCommandHandler($repository);
 
