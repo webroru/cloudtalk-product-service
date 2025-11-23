@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Bus\Command;
 
-interface CommandBus
+interface CommandBusInterface
 {
-    public function dispatch(Command $command) : void;
+    public function dispatch(CommandInterface $command) : void;
 }
