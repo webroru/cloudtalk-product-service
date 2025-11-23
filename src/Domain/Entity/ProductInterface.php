@@ -14,8 +14,6 @@ interface ProductInterface
     public function setDescription(): string;
     public function getPrice(): float;
     public function setPrice(): float;
-    public function getReviews(): array;
-    public function addReview(): array;
     public function getAverage(): float;
     public function setAverage(): float;
 }
