@@ -12,21 +12,21 @@ use PHPUnit\Framework\TestCase;
 
 class UpdateProductCommandHandlerTest extends TestCase
 {
-    public function testItUpdateProductAndSavesToRepository(): void
+    public function testUpdateProductAndSavesToRepository(): void
     {
         $repository = $this->createMock(ProductRepositoryInterface::class);
         $existingProduct = $this->createMock(ProductInterface::class);
 
         $repository
             ->expects(self::once())
-            ->method('save')
-            ->with(self::isInstanceOf(ProductInterface::class));
-
-        $repository
-            ->expects(self::once())
             ->method('findById')
             ->with('abc123')
             ->willReturn($existingProduct);
+
+        $repository
+            ->expects(self::once())
+            ->method('save')
+            ->with(self::isInstanceOf(ProductInterface::class));
 
         $handler = new UpdateProductCommandHandler($repository);
 
