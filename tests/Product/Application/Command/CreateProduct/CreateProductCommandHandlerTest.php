@@ -28,7 +28,7 @@ class CreateProductCommandHandlerTest extends TestCase
         $command = new CreateProductCommand(
             name: 'Test',
             description: 'Desc',
-            price: 100.0
+            price: 100.0,
         );
 
         $handler($command);
