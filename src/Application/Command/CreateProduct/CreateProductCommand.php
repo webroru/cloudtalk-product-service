@@ -6,27 +6,12 @@ namespace App\Application\Command\CreateProduct;
 
 use App\Domain\Bus\Command\CommandInterface;
 
-readonly class CreateProductCommand implements CommandInterface
+final readonly class CreateProductCommand implements CommandInterface
 {
     public function __construct(
-        private string $name,
-        private string $description,
-        private float $price,
+        public string $name,
+        public string $description,
+        public float $price,
     ) {
-    }
-
-    public function name(): string
-    {
-        return $this->name;
-    }
-
-    public function description(): string
-    {
-        return $this->description;
-    }
-
-    public function price(): float
-    {
-        return $this->price;
     }
 }

@@ -18,9 +18,9 @@ readonly class CreateProductCommandHandler
     public function __invoke(CreateProductCommand $command): void
     {
         $product = $this->factory->create(
-            name: $command->name(),
-            description: $command->description(),
-            price: $command->price()
+            name: $command->name,
+            description: $command->description,
+            price: $command->price
         );
 
         $this->repository->save($product);
