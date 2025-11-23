@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class CreateProductCommandHandlerTest extends TestCase
 {
-    public function testItCreatesProductAndSavesToRepository(): void
+    public function testCreateProductAndSavesToRepository(): void
     {
         $repository = $this->createMock(ProductRepositoryInterface::class);
         $factory = $this->createMock(ProductFactoryInterface::class);
