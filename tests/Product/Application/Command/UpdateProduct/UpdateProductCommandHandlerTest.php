@@ -6,6 +6,7 @@ namespace App\Tests\Product\Application\Command\UpdateProduct;
 
 use App\Application\Command\UpdateProduct\UpdateProductCommand;
 use App\Application\Command\UpdateProduct\UpdateProductCommandHandler;
+use App\Domain\Entity\Product;
 use App\Domain\Entity\ProductInterface;
 use App\Domain\Repository\ProductRepositoryInterface;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +16,11 @@ class UpdateProductCommandHandlerTest extends TestCase
     public function testUpdateProductAndSavesToRepository(): void
     {
         $repository = $this->createMock(ProductRepositoryInterface::class);
-        $existingProduct = $this->createMock(ProductInterface::class);
+        $existingProduct = new Product(
+            id: 'abc123',
+            name: 'Old name',
+            description: 'Old desc',
+        );
 
         $repository
             ->expects(self::once())
