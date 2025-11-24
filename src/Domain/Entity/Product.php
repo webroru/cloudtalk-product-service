@@ -6,21 +6,21 @@ namespace App\Domain\Entity;
 
 class Product implements ProductInterface
 {
-    private string $id;
+    private string $uuid;
     private string $name;
     private string $description;
     private float $price;
 
     public function __construct(string $id, string $name, ?string $description)
     {
-        $this->id = $id;
+        $this->uuid = $id;
         $this->name = $name;
         $this->description = $description;
     }
 
-    public function getId(): string
+    public function getUuid(): string
     {
-        return $this->id;
+        return $this->uuid;
     }
 
     public function getName(): string

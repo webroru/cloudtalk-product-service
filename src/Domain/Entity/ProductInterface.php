@@ -6,7 +6,7 @@ namespace App\Domain\Entity;
 
 interface ProductInterface
 {
-    public function getId(): string;
+    public function getUuid(): string;
     public function getName(): string;
     public function setName(string $name): self;
     public function getDescription(): string;
