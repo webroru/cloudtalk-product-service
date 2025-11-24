@@ -6,6 +6,7 @@ namespace App\Tests\Product\Application\Command\DeleteProduct;
 
 use App\Application\Command\DeleteProduct\DeleteProductCommand;
 use App\Application\Command\DeleteProduct\DeleteProductCommandHandler;
+use App\Domain\Entity\Product;
 use App\Domain\Entity\ProductInterface;
 use App\Domain\Repository\ProductRepositoryInterface;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +16,11 @@ class DeleteProductCommandHandlerTest extends TestCase
     public function testDeleteProduct(): void
     {
         $repository = $this->createMock(ProductRepositoryInterface::class);
-        $existingProduct = $this->createMock(ProductInterface::class);
+        $existingProduct = new Product(
+            id: 'abc123',
+            name: 'Existing Product',
+            description: 'An existing product in the repository',
+        );
 
         $repository
             ->expects(self::once())
