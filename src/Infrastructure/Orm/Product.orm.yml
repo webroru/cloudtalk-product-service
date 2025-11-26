@@ -3,9 +3,9 @@ App\Domain\Product:
   table: product
   id:
     id:
-      type: uuid
+      type: App\Infrastructure\Orm\ProductIdType
       generator:
-        strategy: NONE
+        strategy: SEQUENCE
   fields:
     name:
       type: string
