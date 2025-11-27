@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Orm;
 
-use App\Domain\ValueObject\ProductId;
+use App\Domain\Product\ValueObject\ProductId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
