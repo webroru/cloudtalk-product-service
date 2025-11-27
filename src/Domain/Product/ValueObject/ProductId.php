@@ -6,13 +6,10 @@ namespace App\Domain\Product\ValueObject;
 
 use Symfony\Component\Uid\Uuid;
 
-final class ProductId
+final readonly class ProductId
 {
-    private Uuid $value;
-
-    private function __construct(Uuid $value)
+    private function __construct(private Uuid $value)
     {
-        $this->value = $value;
     }
 
     public static function fromString(string $id): self
