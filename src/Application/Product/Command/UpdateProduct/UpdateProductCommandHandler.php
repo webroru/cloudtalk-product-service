@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Application\Product\Command\UpdateProduct;
 
+use App\Application\Shared\Bus\Command\CommandHandlerInterface;
 use App\Domain\Product\Repository\ProductRepositoryInterface;
 
-final readonly class UpdateProductCommandHandler
+final readonly class UpdateProductCommandHandler implements CommandHandlerInterface
 {
     public function __construct(
         private ProductRepositoryInterface $repository,

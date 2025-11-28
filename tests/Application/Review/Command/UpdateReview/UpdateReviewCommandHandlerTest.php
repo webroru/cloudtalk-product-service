@@ -10,7 +10,6 @@ use App\Application\Shared\Event\EventBusInterface;
 use App\Domain\Product\ValueObject\ProductId;
 use App\Domain\Review\Entity\Review;
 use App\Domain\Review\Entity\ReviewInterface;
-use App\Domain\Review\Event\ReviewCreatedEvent;
 use App\Domain\Review\Event\ReviewUpdatedEvent;
 use App\Domain\Review\Repository\ReviewRepositoryInterface;
 use App\Domain\Review\ValueObject\Rating;

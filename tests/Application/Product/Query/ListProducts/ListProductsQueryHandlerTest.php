@@ -33,7 +33,6 @@ final class ListProductsQueryHandlerTest extends TestCase
         $listProductsResponse = $handler($query);
         $products = $listProductsResponse->products;
 
-        self::assertInstanceOf(ListProductsResponse::class, $listProductsResponse);
         self::assertSame($product->getId()->toString(), $products[0]->id);
         self::assertSame($product->getName(), $products[0]->name);
         self::assertSame($product->getPrice(), $products[0]->price);
