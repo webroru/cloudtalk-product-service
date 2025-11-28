@@ -8,8 +8,10 @@ use App\Domain\Review\Entity\ReviewInterface;
 
 interface ReviewRepositoryInterface
 {
+    /** @return ReviewInterface[] */
     public function findAll(): array;
     public function findById(string $id): ?ReviewInterface;
+    /** @return ReviewInterface[] */
     public function findByProductId(string $id): array;
     public function save(ReviewInterface $product): void;
     public function delete(ReviewInterface $product): void;
