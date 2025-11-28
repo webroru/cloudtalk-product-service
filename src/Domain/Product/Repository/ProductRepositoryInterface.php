@@ -8,6 +8,7 @@ use App\Domain\Product\Entity\ProductInterface;
 
 interface ProductRepositoryInterface
 {
+    /** @return ProductInterface[] */
     public function findAll(): array;
     public function findById(string $id): ?ProductInterface;
     public function save(ProductInterface $product): void;
