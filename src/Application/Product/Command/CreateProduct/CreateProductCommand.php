@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Product\Command\CreateProduct;
 
-use App\Domain\Bus\Command\CommandInterface;
+use App\Application\Shared\Bus\Command\CommandInterface;
 
 final readonly class CreateProductCommand implements CommandInterface
 {

@@ -6,7 +6,6 @@ namespace App\Tests\Application\Product\Query\GetProductById;
 
 use App\Application\Product\Query\GetProductById\GetProductByIdQuery;
 use App\Application\Product\Query\GetProductById\GetProductByIdQueryHandler;
-use App\Application\Product\Query\GetProductById\GetProductByIdResponse;
 use App\Domain\Product\Entity\Product;
 use App\Domain\Product\Repository\ProductRepositoryInterface;
 use App\Domain\Product\ValueObject\ProductId;
@@ -37,7 +36,6 @@ class GetProductByIdQueryHandlerTest extends TestCase
         $query = new GetProductByIdQuery($uuid);
         $getProductByIdResponse = $handler($query);
 
-        self::assertInstanceOf(GetProductByIdResponse::class, $getProductByIdResponse);
         self::assertSame($product->getId()->toString(), $getProductByIdResponse->productDto->id);
         self::assertSame($product->getName(), $getProductByIdResponse->productDto->name);
         self::assertSame($product->getPrice(), $getProductByIdResponse->productDto->price);

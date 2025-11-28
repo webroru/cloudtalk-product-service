@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Application\Product\Query\GetProductById;
 
 use App\Application\Product\Query\DTO\ProductDto;
+use App\Application\Shared\Bus\Query\QueryHandlerInterface;
 use App\Domain\Product\Repository\ProductRepositoryInterface;
 
-final readonly class GetProductByIdQueryHandler
+final readonly class GetProductByIdQueryHandler implements QueryHandlerInterface
 {
     public function __construct(private ProductRepositoryInterface $repository)
     {
@@ -15,7 +16,7 @@ final readonly class GetProductByIdQueryHandler
 
     public function __invoke(GetProductByIdQuery $query): GetProductByIdResponse
     {
-        $product = $this->repository->findById($query->id()->toString());
+        $product = $this->repository->findById($query->id->toString());
 
         return new GetProductByIdResponse(new ProductDto(
             id: $product->getId()->toString(),

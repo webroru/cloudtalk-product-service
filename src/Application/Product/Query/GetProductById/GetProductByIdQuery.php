@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace App\Application\Product\Query\GetProductById;
 
+use App\Application\Shared\Bus\Query\QueryInterface;
 use App\Domain\Product\ValueObject\ProductId;
 
-final readonly class GetProductByIdQuery
+final readonly class GetProductByIdQuery implements QueryInterface
 {
-    public function __construct(private ProductId $id)
+    public function __construct(public ProductId $id)
     {
-    }
-
-    public function id(): ProductId
-    {
-        return $this->id;
     }
 }
