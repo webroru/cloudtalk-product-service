@@ -19,7 +19,7 @@ final readonly class UpdateReviewCommandHandler implements QueryHandlerInterface
 
     public function __invoke(UpdateReviewCommand $command): void
     {
-        $review = $this->repository->findById($command->id->toString());
+        $review = $this->repository->findById($command->id);
 
         if ($review === null) {
             throw new \RuntimeException('Review not found.');

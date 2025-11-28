@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Application\Review\Query\GetProductReviews;
 
 use App\Application\Shared\Bus\Query\QueryHandlerInterface;
-use App\Domain\Review\Entity\ReviewInterface;
 use App\Domain\Review\Repository\ReviewRepositoryInterface;
 use App\Application\Review\Query\DTO\ReviewDto;
 
@@ -18,8 +17,7 @@ final readonly class GetProductReviewsQueryHandler implements QueryHandlerInterf
 
     public function __invoke(GetProductReviewsQuery $query): GetProductReviewsResponse
     {
-        /** @var ReviewInterface[] $reviews */
-        $reviews = $this->repository->findByProductId($query->productId->toString());
+        $reviews = $this->repository->findByProductId($query->productId);
 
         $dtos = [];
 
