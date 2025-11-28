@@ -41,7 +41,7 @@ class UpdateProductCommandHandlerTest extends TestCase
         $handler = new UpdateProductCommandHandler($repository);
 
         $command = new UpdateProductCommand(
-            id: $uuid->toString(),
+            id: $uuid,
             name: 'New name',
             description: 'New desc',
             price: 99.9,
