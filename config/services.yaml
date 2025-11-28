@@ -15,6 +15,18 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+        exclude:
+            - '../src/*/Domain/*'
+#            - '../src/Kernel.php'
+
+    App\Infrastructure\Http\:
+        resource: '../src/Infrastructure/Http'
+        tags: ['controller.service_arguments']
+
+    App\Domain\Product\Repository\ProductRepositoryInterface:
+        class: App\Infrastructure\Doctrine\Repository\DoctrineProductRepository
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
