@@ -3,7 +3,7 @@ App\Domain\Product:
   table: product
   id:
     id:
-      type: App\Infrastructure\Orm\ProductIdType
+      type: App\Infrastructure\Doctrine\Type\ProductIdType
       generator:
         strategy: SEQUENCE
   fields:
