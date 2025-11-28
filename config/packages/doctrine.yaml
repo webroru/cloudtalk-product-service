@@ -6,7 +6,7 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
         types:
-            App\Infrastructure\Doctrine\Type\ProductIdType: \App\Infrastructure\Doctrine\Type\ProductIdType
+            App\Infrastructure\Doctrine\Type\ProductIdType: App\Infrastructure\Doctrine\Type\ProductIdType
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
@@ -16,12 +16,12 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
-            App:
-                type: attribute
+            Product:
+                type: yaml
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/Mapping'
-                prefix: 'App\Domain\Entity'
-                alias: App
+                prefix: 'App\Domain\Product\Entity'
+                alias: Product
         controller_resolver:
             auto_mapping: false
 
