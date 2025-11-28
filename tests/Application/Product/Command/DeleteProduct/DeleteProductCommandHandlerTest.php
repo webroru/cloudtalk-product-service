@@ -39,7 +39,7 @@ class DeleteProductCommandHandlerTest extends TestCase
         $handler = new DeleteProductCommandHandler($repository);
 
         $command = new DeleteProductCommand(
-            id: $uuid->toString(),
+            id: $uuid,
         );
 
         $handler($command);
