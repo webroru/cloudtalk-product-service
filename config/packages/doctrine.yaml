@@ -6,22 +6,20 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
         types:
-            App\Infrastructure\Doctrine\Type\ProductIdType: \App\Infrastructure\Doctrine\Type\ProductIdType
+            App\Infrastructure\Doctrine\Type\ProductIdType: App\Infrastructure\Doctrine\Type\ProductIdType
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
-        validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        identity_generation_preferences:
-            Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
-        auto_mapping: true
+        auto_mapping: false
         mappings:
-            App:
-                type: attribute
-                is_bundle: false
+            Product:
+                type: php
                 dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/Mapping'
-                prefix: 'App\Domain\Entity'
-                alias: App
+                prefix: 'App\Domain\Product\Entity'
+                is_bundle: false
+                alias: Product
+
         controller_resolver:
             auto_mapping: false
 
