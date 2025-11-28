@@ -16,12 +16,12 @@ final readonly class DeleteProductCommandHandler implements CommandHandlerInterf
 
     public function __invoke(DeleteProductCommand $command): void
     {
-        $product = $this->repository->findById($command->id->toString());
+        $product = $this->repository->findById($command->id);
 
         if ($product === null) {
             throw new \RuntimeException('Product not found.');
         }
 
-        $this->repository->delete($product);
+        $this->repository->remove($product);
     }
 }
