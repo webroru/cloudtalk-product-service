@@ -28,12 +28,12 @@ class DeleteProductCommandHandlerTest extends TestCase
         $repository
             ->expects(self::once())
             ->method('findById')
-            ->with($uuid->toString())
+            ->with($uuid)
             ->willReturn($existingProduct);
 
         $repository
             ->expects(self::once())
-            ->method('delete')
+            ->method('remove')
             ->with(self::isInstanceOf(ProductInterface::class));
 
         $handler = new DeleteProductCommandHandler($repository);

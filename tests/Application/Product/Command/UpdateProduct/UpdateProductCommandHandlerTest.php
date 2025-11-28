@@ -28,7 +28,7 @@ class UpdateProductCommandHandlerTest extends TestCase
         $repository
             ->expects(self::once())
             ->method('findById')
-            ->with($uuid->toString())
+            ->with($uuid)
             ->willReturn($existingProduct)
         ;
 

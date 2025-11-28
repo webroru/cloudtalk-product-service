@@ -16,7 +16,7 @@ final readonly class GetProductByIdQueryHandler implements QueryHandlerInterface
 
     public function __invoke(GetProductByIdQuery $query): GetProductByIdResponse
     {
-        $product = $this->repository->findById($query->id->toString());
+        $product = $this->repository->findById($query->id);
 
         return new GetProductByIdResponse(new ProductDto(
             id: $product->getId()->toString(),
