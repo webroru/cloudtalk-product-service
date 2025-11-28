@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Bus\Command;
+namespace App\Application\Shared\Bus\Command;
 
 interface CommandInterface
 {
