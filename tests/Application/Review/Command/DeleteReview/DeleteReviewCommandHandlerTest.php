@@ -55,7 +55,7 @@ class DeleteReviewCommandHandlerTest extends TestCase
         $handler = new DeleteReviewCommandHandler($repository, $eventBus);
 
         $command = new DeleteReviewCommand(
-            id: $reviewId->toString(),
+            id: $reviewId,
         );
 
         $handler($command);
