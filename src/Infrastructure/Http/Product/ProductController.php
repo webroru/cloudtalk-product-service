@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Http\Controller\Product;
+namespace App\Infrastructure\Http\Product;
 
 use App\Application\Product\Command\CreateProduct\CreateProductCommand;
 use App\Application\Product\Command\DeleteProduct\DeleteProductCommand;
