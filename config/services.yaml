@@ -28,5 +28,11 @@ services:
         arguments:
             - '@doctrine.orm.default_entity_manager'
 
+    App\Domain\Product\Factory\ProductFactoryInterface: '@App\Infrastructure\Factory\ProductFactory'
+
+    ### Buses
+    App\Application\Product\Command\CreateProduct\CreateProductCommandHandler:
+        tags: ['messenger.message_handler']
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
