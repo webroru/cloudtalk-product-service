@@ -8,10 +8,12 @@ use App\Application\Product\Command\CreateProduct\CreateProductCommand;
 use App\Application\Product\Command\DeleteProduct\DeleteProductCommand;
 use App\Application\Product\Command\UpdateProduct\UpdateProductCommand;
 use App\Application\Product\Query\GetProductById\GetProductByIdQuery;
+use App\Application\Product\Query\GetProductById\GetProductByIdResponse;
 use App\Application\Product\Query\ListProducts\ListProductsQuery;
-use App\Domain\Product\Entity\Product;
+use App\Application\Product\Query\ListProducts\ListProductsResponse;
 use App\Domain\Product\ValueObject\ProductId;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 final readonly class ProductService
 {
@@ -40,17 +42,17 @@ final readonly class ProductService
         $this->commandBus->dispatch($command);
     }
 
-    public function getProduct(ProductId $id): Product
+    public function getProduct(ProductId $id): GetProductByIdResponse
     {
         $command = new GetProductByIdQuery(id: $id);
         $envelope = $this->commandBus->dispatch($command);
-        return $envelope->last(MessageBusInterface::class)->getResult();
+        return $envelope->last(HandledStamp::class)->getResult();
     }
 
-    public function listProducts(): array
+    public function listProducts(): ListProductsResponse
     {
         $command = new ListProductsQuery();
         $envelope = $this->commandBus->dispatch($command);
-        return $envelope->last(MessageBusInterface::class)->getResult();
+        return $envelope->last(HandledStamp::class)->getResult();
     }
 }

@@ -62,12 +62,12 @@ final class ProductController extends AbstractController
     public function get(
         string $id,
     ): JsonResponse {
-        return $this->json($this->productService->getProduct(ProductId::fromString($id)));
+        return $this->json($this->productService->getProduct(ProductId::fromString($id))->productDto);
     }
 
     #[Route('/products', name: 'product_list', methods: ['GET'])]
     public function list(
     ): JsonResponse {
-        return $this->json($this->productService->listProducts());
+        return $this->json($this->productService->listProducts()->products);
     }
 }

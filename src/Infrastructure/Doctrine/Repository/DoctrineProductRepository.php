@@ -31,7 +31,7 @@ final readonly class DoctrineProductRepository implements ProductRepositoryInter
 
     public function findById(ProductId $id): ProductInterface
     {
-        $product = $this->em->getRepository(Product::class)->find($id->toString());
+        $product = $this->em->getRepository(Product::class)->find($id);
 
         if (!$product instanceof ProductInterface) {
             throw new \RuntimeException(sprintf('Product with id "%s" not found', $id->toString()));
