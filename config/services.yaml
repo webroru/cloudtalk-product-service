@@ -34,5 +34,17 @@ services:
     App\Application\Product\Command\CreateProduct\CreateProductCommandHandler:
         tags: ['messenger.message_handler']
 
+    App\Application\Product\Command\UpdateProduct\UpdateProductCommandHandler:
+        tags: ['messenger.message_handler']
+
+    App\Application\Product\Command\DeleteProduct\DeleteProductCommandHandler:
+        tags: ['messenger.message_handler']
+
+    App\Application\Product\Query\GetProductById\GetProductByIdQueryHandler:
+        tags: ['messenger.message_handler']
+
+    App\Application\Product\Query\ListProducts\ListProductsQueryHandler:
+        tags: ['messenger.message_handler']
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
