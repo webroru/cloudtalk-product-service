@@ -7,6 +7,7 @@ doctrine:
         #server_version: '16'
         types:
             App\Infrastructure\Doctrine\Type\ProductIdType: App\Infrastructure\Doctrine\Type\ProductIdType
+            App\Infrastructure\Doctrine\Type\ReviewIdType: App\Infrastructure\Doctrine\Type\ReviewIdType
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
@@ -19,6 +20,12 @@ doctrine:
                 prefix: 'App\Domain\Product\Entity'
                 is_bundle: false
                 alias: Product
+            Review:
+                type: php
+                dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/Mapping'
+                prefix: 'App\Domain\Review\Entity'
+                is_bundle: false
+                alias: Review
 
         controller_resolver:
             auto_mapping: false
