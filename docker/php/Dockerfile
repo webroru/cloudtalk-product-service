@@ -8,13 +8,15 @@ RUN apk add --no-cache \
 
 # Build deps
 RUN apk add --update --no-cache --virtual .build-deps \
+    $PHPIZE_DEPS \
+    linux-headers \
     rabbitmq-c-dev \
     autoconf \
     make \
     g++
 
-RUN pecl install amqp \
-    && docker-php-ext-enable amqp
+RUN pecl install amqp redis \
+    && docker-php-ext-enable amqp redis
 
 RUN docker-php-ext-install -j "$(nproc)" \
     pdo \

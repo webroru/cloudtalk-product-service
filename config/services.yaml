@@ -55,5 +55,13 @@ services:
         arguments:
             - '@messenger.bus.event.async'
 
+    App\Application\Product\Query\GetProductReviews\GetProductReviewsQueryHandler: ~
+
+    App\Application\Product\Query\GetProductReviews\CachedGetProductReviewsQueryHandler:
+        decorates: App\Application\Product\Query\GetProductReviews\GetProductReviewsQueryHandler
+        arguments:
+            - '@App\Application\Product\Query\GetProductReviews\CachedGetProductReviewsQueryHandler.inner'
+            - '@cache.app'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
