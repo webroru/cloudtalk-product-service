@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Review\Query\GetProductReviews;
 
-use App\Application\Review\Query\GetProductReviews\GetProductReviewsQuery;
-use App\Application\Review\Query\GetProductReviews\GetProductReviewsQueryHandler;
+use App\Application\Product\Query\GetProductReviews\GetProductReviewsQuery;
+use App\Application\Product\Query\GetProductReviews\GetProductReviewsQueryHandler;
 use App\Domain\Product\ValueObject\ProductId;
 use App\Domain\Review\Entity\Review;
 use App\Domain\Review\Repository\ReviewRepositoryInterface;

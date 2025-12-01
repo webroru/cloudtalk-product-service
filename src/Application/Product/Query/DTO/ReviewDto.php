@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Review\Query\DTO;
+namespace App\Application\Product\Query\DTO;
 
 final readonly class ReviewDto
 {

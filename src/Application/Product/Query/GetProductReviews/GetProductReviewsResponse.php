@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Review\Query\GetProductReviews;
+namespace App\Application\Product\Query\GetProductReviews;
 
-use App\Application\Review\Query\DTO\ReviewDto;
+use App\Application\Product\Query\DTO\ReviewDto;
 use App\Application\Shared\Bus\Query\ResponseInterface;
 
 final readonly class GetProductReviewsResponse implements ResponseInterface
