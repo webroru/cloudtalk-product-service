@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace App\Infrastructure\Bus\Event;
 
 use App\Application\Shared\Bus\Event\EventBusInterface;
+use App\Domain\Review\Event\EventInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
-class MessengerEventBus implements EventBusInterface
+final readonly class MessengerEventBus implements EventBusInterface
 {
-
-    public function dispatch(object $event): void
+    public function __construct(private MessageBusInterface $eventBus)
     {
-        // TODO: Implement dispatch() method.
+    }
+
+    public function dispatch(EventInterface $event): void
+    {
+        $this->eventBus->dispatch($event);
     }
 }
