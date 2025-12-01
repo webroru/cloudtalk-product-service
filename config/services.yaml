@@ -51,7 +51,7 @@ services:
         arguments:
             - '@messenger.bus.query'
 
-    App\Application\Shared\Event\EventBusInterface:
+    App\Infrastructure\Bus\Event\MessengerEventBus:
         arguments:
             - '@messenger.bus.event.async'
 
