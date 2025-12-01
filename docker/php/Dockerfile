@@ -3,11 +3,25 @@ FROM php:8.4-fpm-alpine AS base
 # Install permanent packages
 RUN apk add --no-cache \
     git \
-    mysql-client
+    mysql-client \
+    rabbitmq-c
+
+# Build deps
+RUN apk add --update --no-cache --virtual .build-deps \
+    rabbitmq-c-dev \
+    autoconf \
+    make \
+    g++
+
+RUN pecl install amqp \
+    && docker-php-ext-enable amqp
 
 RUN docker-php-ext-install -j "$(nproc)" \
     pdo \
     pdo_mysql
+
+RUN apk del .build-deps \
+    && rm -rf /var/cache/apk/*
 
 ENV PATH=${PATH}:/var/www/html/vendor/bin
 

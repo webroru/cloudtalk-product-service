@@ -6,7 +6,7 @@ namespace App\Infrastructure\Bus\Event;
 
 use App\Application\Shared\Bus\Event\EventBusInterface;
 
-class EventBus implements EventBusInterface
+class MessengerEventBus implements EventBusInterface
 {
 
     public function dispatch(object $event): void
