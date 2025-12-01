@@ -20,7 +20,7 @@ final readonly class CreateReviewCommandHandler implements CommandHandlerInterfa
     ) {
     }
 
-    public function __invoke(CreateReviewCommand $command): ReviewId
+    public function __invoke(CreateReviewCommand $command): void
     {
         $review = $this->factory->create(
             productId: $command->productId,
@@ -39,7 +39,5 @@ final readonly class CreateReviewCommandHandler implements CommandHandlerInterfa
                 rating: $review->getRating()->getValue(),
             )
         );
-
-        return $review->getId();
     }
 }
