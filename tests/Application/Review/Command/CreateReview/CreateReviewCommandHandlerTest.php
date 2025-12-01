@@ -6,7 +6,7 @@ namespace App\Tests\Application\Review\Command\CreateReview;
 
 use App\Application\Review\Command\CreateReview\CreateReviewCommand;
 use App\Application\Review\Command\CreateReview\CreateReviewCommandHandler;
-use App\Application\Shared\Event\EventBusInterface;
+use App\Application\Shared\Bus\Event\EventBusInterface;
 use App\Domain\Product\ValueObject\ProductId;
 use App\Domain\Review\Entity\ReviewInterface;
 use App\Domain\Review\Event\ReviewCreatedEvent;

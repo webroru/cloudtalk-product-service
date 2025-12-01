@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Shared\Event;
+namespace App\Application\Shared\Bus\Event;
 
 interface EventBusInterface
 {

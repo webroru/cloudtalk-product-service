@@ -6,7 +6,7 @@ namespace App\Tests\Application\Review\Command\DeleteReview;
 
 use App\Application\Review\Command\DeleteReview\DeleteReviewCommand;
 use App\Application\Review\Command\DeleteReview\DeleteReviewCommandHandler;
-use App\Application\Shared\Event\EventBusInterface;
+use App\Application\Shared\Bus\Event\EventBusInterface;
 use App\Domain\Product\ValueObject\ProductId;
 use App\Domain\Review\Entity\Review;
 use App\Domain\Review\Entity\ReviewInterface;

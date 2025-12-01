@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Review\Command\UpdateReview;
 
+use App\Application\Shared\Bus\Event\EventBusInterface;
 use App\Application\Shared\Bus\Query\QueryHandlerInterface;
-use App\Application\Shared\Event\EventBusInterface;
 use App\Domain\Review\Event\ReviewUpdatedEvent;
 use App\Domain\Review\Repository\ReviewRepositoryInterface;
 
