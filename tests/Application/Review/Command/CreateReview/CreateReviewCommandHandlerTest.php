@@ -15,6 +15,7 @@ use App\Domain\Review\Repository\ReviewRepositoryInterface;
 use App\Domain\Review\ValueObject\Rating;
 use App\Domain\Review\ValueObject\ReviewId;
 use PHPUnit\Framework\TestCase;
+use Symfony\Contracts\Cache\CacheInterface;
 
 final class CreateReviewCommandHandlerTest extends TestCase
 {
@@ -36,6 +37,7 @@ final class CreateReviewCommandHandlerTest extends TestCase
         $factory = $this->createMock(ReviewFactoryInterface::class);
         $eventBus = $this->createMock(EventBusInterface::class);
         $review = $this->createMock(ReviewInterface::class);
+        $cache = $this->createMock(CacheInterface::class);
 
         $factory
             ->expects($this->once())
@@ -66,7 +68,9 @@ final class CreateReviewCommandHandlerTest extends TestCase
             ->method('getRating')
             ->willReturn($rating);
 
-        $handler = new CreateReviewCommandHandler($factory, $repository, $eventBus);
+        $cache->method('delete');
+
+        $handler = new CreateReviewCommandHandler($factory, $repository, $eventBus, $cache);
 
         $handler($command);
     }

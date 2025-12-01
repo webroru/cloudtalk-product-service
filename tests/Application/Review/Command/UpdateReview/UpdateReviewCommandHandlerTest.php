@@ -15,6 +15,7 @@ use App\Domain\Review\Repository\ReviewRepositoryInterface;
 use App\Domain\Review\ValueObject\Rating;
 use App\Domain\Review\ValueObject\ReviewId;
 use PHPUnit\Framework\TestCase;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class UpdateReviewCommandHandlerTest extends TestCase
 {
@@ -22,6 +23,7 @@ class UpdateReviewCommandHandlerTest extends TestCase
     {
         $repository = $this->createMock(ReviewRepositoryInterface::class);
         $eventBus = $this->createMock(EventBusInterface::class);
+        $cache = $this->createMock(CacheInterface::class);
 
         $reviewId = ReviewId::generate();
         $productId = ProductId::generate();
@@ -54,7 +56,9 @@ class UpdateReviewCommandHandlerTest extends TestCase
             ->method('dispatch')
             ->with($this->isInstanceOf(ReviewUpdatedEvent::class));
 
-        $handler = new UpdateReviewCommandHandler($repository, $eventBus);
+        $cache->method('delete');
+
+        $handler = new UpdateReviewCommandHandler($repository, $eventBus, $cache);
 
         $command = new UpdateReviewCommand(
             id: $reviewId,
