@@ -40,7 +40,7 @@ services:
             - '@doctrine.orm.default_entity_manager'
 
     App\Domain\Product\Factory\ProductFactoryInterface: '@App\Infrastructure\Factory\ProductFactory'
-    App\Domain\Review\Factory\ReviewFactoryInterface: '@App\Infrastructure\Factory\ProductFactory'
+    App\Domain\Review\Factory\ReviewFactoryInterface: '@App\Infrastructure\Factory\ReviewFactory'
 
     ### Buses
     App\Infrastructure\Bus\Command\MessengerCommandBus:
