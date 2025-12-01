@@ -34,9 +34,9 @@ final readonly class CreateReviewCommandHandler implements CommandHandlerInterfa
 
         $this->eventBus->dispatch(
             new ReviewCreatedEvent(
-                reviewId: $review->getId(),
-                productId: $review->getProductId(),
-                rating: $review->getRating(),
+                reviewId: $review->getId()->toString(),
+                productId: $review->getProductId()->toString(),
+                rating: $review->getRating()->getValue(),
             )
         );
 

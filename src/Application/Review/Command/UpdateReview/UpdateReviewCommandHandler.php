@@ -37,9 +37,9 @@ final readonly class UpdateReviewCommandHandler implements CommandHandlerInterfa
 
         $this->eventBus->dispatch(
             new ReviewUpdatedEvent(
-                reviewId: $review->getId(),
-                productId: $review->getProductId(),
-                rating: $review->getRating(),
+                reviewId: $review->getId()->toString(),
+                productId: $review->getProductId()->toString(),
+                rating: $review->getRating()->getValue(),
             )
         );
     }
