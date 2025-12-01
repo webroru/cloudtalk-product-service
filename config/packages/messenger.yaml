@@ -24,6 +24,7 @@ framework:
             sync: 'sync://'
             events:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: App\Infrastructure\Messenger\JsonMessageSerializer
                 retry_strategy:
                     max_retries: 5
                     delay: 1000
