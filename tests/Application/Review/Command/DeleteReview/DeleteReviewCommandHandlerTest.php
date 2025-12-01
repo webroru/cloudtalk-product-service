@@ -44,7 +44,7 @@ class DeleteReviewCommandHandlerTest extends TestCase
 
         $repository
             ->expects(self::once())
-            ->method('delete')
+            ->method('remove')
             ->with(self::isInstanceOf(ReviewInterface::class));
 
         $eventBus
