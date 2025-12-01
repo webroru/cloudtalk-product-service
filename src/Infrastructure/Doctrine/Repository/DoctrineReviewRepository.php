@@ -50,6 +50,6 @@ final readonly class DoctrineReviewRepository implements ReviewRepositoryInterfa
 
     public function findByProductId(ProductId $id): array
     {
-        return $this->em->getRepository(Review::class)->findBy(['product' => $id]);
+        return $this->em->getRepository(Review::class)->findBy(['productId' => $id]);
     }
 }
