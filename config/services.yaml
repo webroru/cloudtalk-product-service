@@ -11,6 +11,17 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    _instanceof:
+        App\Application\Shared\Bus\Command\CommandHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: messenger.bus.command }
+
+        App\Application\Shared\Bus\Query\QueryHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: messenger.bus.query }
+
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -29,22 +40,20 @@ services:
             - '@doctrine.orm.default_entity_manager'
 
     App\Domain\Product\Factory\ProductFactoryInterface: '@App\Infrastructure\Factory\ProductFactory'
+    App\Domain\Review\Factory\ReviewFactoryInterface: '@App\Infrastructure\Factory\ProductFactory'
 
     ### Buses
-    App\Application\Product\Command\CreateProduct\CreateProductCommandHandler:
-        tags: ['messenger.message_handler']
+    App\Infrastructure\Bus\Command\MessengerCommandBus:
+        arguments:
+            - '@messenger.bus.command'
 
-    App\Application\Product\Command\UpdateProduct\UpdateProductCommandHandler:
-        tags: ['messenger.message_handler']
+    App\Infrastructure\Bus\Query\MessengerQueryBus:
+        arguments:
+            - '@messenger.bus.query'
 
-    App\Application\Product\Command\DeleteProduct\DeleteProductCommandHandler:
-        tags: ['messenger.message_handler']
-
-    App\Application\Product\Query\GetProductById\GetProductByIdQueryHandler:
-        tags: ['messenger.message_handler']
-
-    App\Application\Product\Query\ListProducts\ListProductsQueryHandler:
-        tags: ['messenger.message_handler']
+    App\Application\Shared\Event\EventBusInterface:
+        arguments:
+            - '@messenger.bus.event.async'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
