@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Application\Review\Command\UpdateReview;
 
+use App\Application\Shared\Bus\Command\CommandHandlerInterface;
 use App\Application\Shared\Bus\Event\EventBusInterface;
-use App\Application\Shared\Bus\Query\QueryHandlerInterface;
 use App\Domain\Review\Event\ReviewUpdatedEvent;
 use App\Domain\Review\Repository\ReviewRepositoryInterface;
 
-final readonly class UpdateReviewCommandHandler implements QueryHandlerInterface
+final readonly class UpdateReviewCommandHandler implements CommandHandlerInterface
 {
     public function __construct(
         private ReviewRepositoryInterface $repository,
