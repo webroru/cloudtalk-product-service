@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Doctrine\Repository;
 
-use App\Domain\Product\Entity\Product;
 use App\Domain\Product\Entity\ProductInterface;
 use App\Domain\Product\ValueObject\ProductId;
+use App\Domain\Review\Entity\Review;
 use App\Domain\Review\Entity\ReviewInterface;
 use App\Domain\Review\Repository\ReviewRepositoryInterface;
 use App\Domain\Review\ValueObject\ReviewId;
@@ -19,9 +19,9 @@ final readonly class DoctrineReviewRepository implements ReviewRepositoryInterfa
     ) {
     }
 
-    public function save(ReviewInterface $product): void
+    public function save(ReviewInterface $review): void
     {
-        $this->em->persist($product);
+        $this->em->persist($review);
         $this->em->flush();
     }
 
@@ -33,23 +33,23 @@ final readonly class DoctrineReviewRepository implements ReviewRepositoryInterfa
 
     public function findById(ReviewId $id): ReviewInterface
     {
-        $product = $this->em->getRepository(Product::class)->find($id);
+        $review = $this->em->getRepository(Review::class)->find($id);
 
-        if (!$product instanceof ProductInterface) {
-            throw new \RuntimeException(sprintf('Product with id "%s" not found', $id->toString()));
+        if (!$review instanceof ReviewInterface) {
+            throw new \RuntimeException(sprintf('Review with id "%s" not found', $id->toString()));
         }
 
-        return $product;
+        return $review;
     }
 
     /** @return ProductInterface[] */
     public function findAll(): array
     {
-        return $this->em->getRepository(Product::class)->findAll();
+        return $this->em->getRepository(Review::class)->findAll();
     }
 
     public function findByProductId(ProductId $id): array
     {
-        return $this->em->getRepository(Product::class)->findBy(['product' => $id]);
+        return $this->em->getRepository(Review::class)->findBy(['product' => $id]);
     }
 }
