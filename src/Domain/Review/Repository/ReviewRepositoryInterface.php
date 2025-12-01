@@ -16,5 +16,5 @@ interface ReviewRepositoryInterface
     /** @return ReviewInterface[] */
     public function findByProductId(ProductId $id): array;
     public function save(ReviewInterface $product): void;
-    public function delete(ReviewInterface $product): void;
+    public function remove(ReviewInterface $product): void;
 }
