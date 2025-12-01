@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Infrastructure\Doctrine\Type\ProductIdType;
+use App\Infrastructure\Doctrine\Type\RatingType;
 use App\Infrastructure\Doctrine\Type\ReviewIdType;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -36,5 +37,5 @@ $builder
     ->build();
 
 $builder
-    ->createField('rating', 'integer')
+    ->createField('rating', RatingType::class)
     ->build();

@@ -8,6 +8,7 @@ doctrine:
         types:
             App\Infrastructure\Doctrine\Type\ProductIdType: App\Infrastructure\Doctrine\Type\ProductIdType
             App\Infrastructure\Doctrine\Type\ReviewIdType: App\Infrastructure\Doctrine\Type\ReviewIdType
+            App\Infrastructure\Doctrine\Type\RatingType: App\Infrastructure\Doctrine\Type\RatingType
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
