@@ -1,0 +1,28 @@
+POST http://localhost/reviews
+Content-Type: application/json
+
+{
+  "productId": "019ad969-17ba-7ecf-8975-c4308391a881",
+  "firstName": "John",
+  "lastName": "Doe",
+  "text": "Great product! Highly recommend.",
+  "rating": 5
+}
+
+###
+
+PUT http://localhost/reviews/{reviewId}
+Content-Type: application/json
+
+{
+  "productId": "019ad969-17ba-7ecf-8975-c4308391a881",
+  "firstName": "John",
+  "lastName": "Doe",
+  "text": "Updated review: Still a great product!",
+  "rating": 4.9
+}
+
+###
+
+DELETE http://localhost/reviews/{reviewId}
+Accept: application/json

@@ -1,0 +1,38 @@
+GET http://localhost/products/{productId}
+Accept: application/json
+
+###
+
+GET http://localhost/products/{productId}/reviews
+Accept: application/json
+
+###
+
+GET http://localhost/products/
+Accept: application/json
+
+###
+
+POST http://localhost/products
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  "price": 19.99,
+  "description": "A description of the new product."
+}
+
+###
+PUT http://localhost/products/{productId}
+Content-Type: application/json
+
+{
+  "name": "Updated Product",
+  "price": 24.99,
+  "description": "An updated description of the product."
+}
+
+###
+
+DELETE http://localhost/products/{productId}
+Accept: application/json
