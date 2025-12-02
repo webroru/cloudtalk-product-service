@@ -34,6 +34,14 @@ services:
         resource: '../src/Infrastructure/Http'
         tags: ['controller.service_arguments']
 
+    App\Infrastructure\Redis\RedisClient:
+        arguments:
+            - '%env(CACHE_URL)%'
+
+    Redis:
+        class: Redis
+        factory: ['@App\Infrastructure\Redis\RedisClient', 'getClient']
+
     App\Domain\Product\Repository\ProductRepositoryInterface:
         class: App\Infrastructure\Doctrine\Repository\DoctrineProductRepository
         arguments:
