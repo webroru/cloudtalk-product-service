@@ -6,7 +6,7 @@ namespace App\Tests\Application\Product\Query\ListProducts;
 
 use App\Application\Product\Query\ListProducts\ListProductsQuery;
 use App\Application\Product\Query\ListProducts\ListProductsQueryHandler;
-use App\Application\Product\Query\ListProducts\ListProductsResponse;
+use App\Application\Product\Service\ProductRatingService;
 use App\Domain\Product\Entity\Product;
 use App\Domain\Product\Repository\ProductRepositoryInterface;
 use App\Domain\Product\ValueObject\ProductId;
@@ -25,9 +25,22 @@ final class ListProductsQueryHandlerTest extends TestCase
         );
 
         $repository = $this->createMock(ProductRepositoryInterface::class);
-        $repository->method('findAll')->willReturn([$product]);
+        $redis = $this->createMock(\Redis::class);
+        $ratingService = new ProductRatingService($redis);
 
-        $handler = new ListProductsQueryHandler($repository);
+        $repository
+            ->method('findAll')
+            ->willReturn([$product]);
+
+        $redis->expects(self::once())
+            ->method('exists')
+            ->willReturn(true);
+
+        $redis->expects(self::once())
+            ->method('get')
+            ->willReturn(json_encode(['averageRating' => 4.5]));
+
+        $handler = new ListProductsQueryHandler($repository, $ratingService);
 
         $query = new ListProductsQuery();
         $listProductsResponse = $handler($query);

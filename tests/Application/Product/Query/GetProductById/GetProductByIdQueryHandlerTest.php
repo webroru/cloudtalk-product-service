@@ -6,6 +6,7 @@ namespace App\Tests\Application\Product\Query\GetProductById;
 
 use App\Application\Product\Query\GetProductById\GetProductByIdQuery;
 use App\Application\Product\Query\GetProductById\GetProductByIdQueryHandler;
+use App\Application\Product\Service\ProductRatingService;
 use App\Domain\Product\Entity\Product;
 use App\Domain\Product\Repository\ProductRepositoryInterface;
 use App\Domain\Product\ValueObject\ProductId;
@@ -24,6 +25,8 @@ class GetProductByIdQueryHandlerTest extends TestCase
         );
 
         $repository = $this->createMock(ProductRepositoryInterface::class);
+        $redis = $this->createMock(\Redis::class);
+        $ratingService = new ProductRatingService($redis);
 
         $repository
             ->expects(self::once())
@@ -31,7 +34,15 @@ class GetProductByIdQueryHandlerTest extends TestCase
             ->with($uuid)
             ->willReturn($product);
 
-        $handler = new GetProductByIdQueryHandler($repository);
+        $redis->expects(self::once())
+            ->method('exists')
+            ->willReturn(true);
+
+        $redis->expects(self::once())
+            ->method('get')
+            ->willReturn(json_encode(['averageRating' => 4.5]));
+
+        $handler = new GetProductByIdQueryHandler($repository, $ratingService);
 
         $query = new GetProductByIdQuery($uuid);
         $getProductByIdResponse = $handler($query);
