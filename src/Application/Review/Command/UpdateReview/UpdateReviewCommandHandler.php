@@ -30,6 +30,8 @@ final readonly class UpdateReviewCommandHandler implements CommandHandlerInterfa
             throw new \RuntimeException('Review not found.');
         }
 
+        $oldRating = $review->getRating()->getValue();
+
         $review
             ->setProductId($command->productId)
             ->setFirstName($command->firstName)
@@ -43,9 +45,9 @@ final readonly class UpdateReviewCommandHandler implements CommandHandlerInterfa
 
         $this->eventBus->dispatch(
             new ReviewUpdatedEvent(
-                reviewId: $review->getId()->toString(),
                 productId: $review->getProductId()->toString(),
-                rating: $review->getRating()->getValue(),
+                oldRating: $oldRating,
+                newRating: $review->getRating()->getValue(),
             )
         );
     }

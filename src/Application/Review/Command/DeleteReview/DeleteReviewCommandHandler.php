@@ -35,7 +35,8 @@ final readonly class DeleteReviewCommandHandler implements CommandHandlerInterfa
 
         $this->eventBus->dispatch(
             new ReviewDeletedEvent(
-                reviewId: $review->getId()->toString(),
+                productId: $review->getProductId()->toString(),
+                rating: $review->getRating()->getValue(),
             )
         );
     }
