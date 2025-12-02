@@ -53,9 +53,4 @@ class Product implements ProductInterface
         $this->price = $price;
         return $this;
     }
-
-    public function getAverage(): float
-    {
-        // TODO: Implement getAverage() method.
-    }
 }

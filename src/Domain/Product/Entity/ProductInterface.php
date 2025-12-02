@@ -15,5 +15,4 @@ interface ProductInterface
     public function setDescription(string $description): self;
     public function getPrice(): float;
     public function setPrice(float $price): self;
-    public function getAverage(): float;
 }
