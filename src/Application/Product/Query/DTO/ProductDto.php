@@ -11,6 +11,7 @@ final readonly class ProductDto
         public string $name,
         public float $price,
         public ?string $description,
+        public float $averageRating = 0.0,
     ) {
     }
 }
