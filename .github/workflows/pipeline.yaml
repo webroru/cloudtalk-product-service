@@ -16,11 +16,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install PHP + composer deps
-        uses: php-actions/composer@v6
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php_version: "8.4"
-          args: install --no-interaction
+          php-version: '8.4'
+          extensions: pdo, pdo_mysql, amqp, redis
+          coverage: none
+
+      - name: Configure safe git directory
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+      - name: Install composer deps
+        run: composer install --no-interaction
 
       - name: Run tests
         run: |
