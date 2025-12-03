@@ -49,6 +49,8 @@ RUN apk del .build-deps \
 
 FROM base AS prod
 
+ENV APP_ENV=prod
+
 COPY . .
 
 RUN composer install --no-dev --no-interaction --optimize-autoloader
