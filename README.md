@@ -57,3 +57,22 @@ You are free to use any frameworks, databases, caching mechanisms and messaging 
 
 (source file: [diagram.puml](./diagram.puml))
 
+## Production deployment
+
+- To run in production mode, use
+  ```bash 
+  docker-compose -f docker-compose.prod.yml up -d
+  ```
+- Execute migrations in product service container
+  ```bash
+  docker-compose -f docker-compose.prod.yml exec php bin/console doctrine:migrations:migrate --no-interaction
+  ```
+- Execute migrations in review processing service container
+  ```bash
+  docker-compose -f docker-compose.prod.yml exec nodejs npm run migration:run -- -d ./data-source.ts
+  ```
+
+## Usage
+
+You can use [product.http](product.http) and [reviews.http](reviews.http) files to test the services.
+

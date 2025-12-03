@@ -1,0 +1,52 @@
+services:
+  php:
+    image: "ghcr.io/webroru/cloudtalk-product-service:master"
+
+  nodejs:
+    image: "ghcr.io/webroru/cloudtalk-review-service:master"
+    scale: 2
+
+  products_mysql:
+    image: mysql:8.0
+    volumes:
+      - products-data:/var/lib/mysql/:rw
+    environment:
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    command: --default-authentication-plugin=mysql_native_password
+
+  reviews_mysql:
+    image: mysql:8.0
+    volumes:
+      - reviews-data:/var/lib/mysql/:rw
+    environment:
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    command: --default-authentication-plugin=mysql_native_password
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "127.0.0.1:80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/hosts:/etc/nginx/conf.d
+    depends_on:
+      - php
+
+  rabbitmq:
+    image: rabbitmq:4-alpine
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+
+volumes:
+  products-data:
+  reviews-data:
+  redis-data:
