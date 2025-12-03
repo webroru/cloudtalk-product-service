@@ -180,3 +180,15 @@ Below is a roadmap of enhancements for future development.
   - Prometheus/Grafana metrics and dashboards
   - alerting on latency/availability issues
 - Optional split of read model as a standalone microservice
+
+### D) Introduce Custom Exceptions
+
+- Implement project-specific exception classes to clearly distinguish domain, application, and infrastructure errors.
+  This will improve debugging, allow more accurate HTTP status mapping, and make error handling more explicit and predictable.
+
+
+
+
+
+
+
