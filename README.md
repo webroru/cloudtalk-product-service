@@ -76,3 +76,107 @@ You are free to use any frameworks, databases, caching mechanisms and messaging 
 
 You can use [product.http](product.http) and [reviews.http](reviews.http) files to test the services.
 
+## Architectural Decisions and Rationale
+
+## 1. CQRS is Applied — Separation of Reads and Writes
+
+The project implements **CQRS (Command Query Responsibility Separation)**, where state-changing operations (commands) are separated from data retrieval operations (queries).  
+This results in a cleaner architecture and better scalability.
+
+### Why CQRS was chosen:
+
+- Commands modify state and **do not depend on read models**.
+- Queries are optimized for fast data access and do not affect business logic.
+- It simplifies future development — the read model can be optimized independently (e.g. cached via Redis), while the write model stays clean and consistent.
+- Enables independent scaling — **write service ≠ read service**, with the option to move them to separate nodes in the future.
+
+CQRS is especially useful in a review/rating subsystem, where **read operations occur far more frequently than writes**, and low-latency access is crucial.
+
+---
+
+## 2. Core functionality was developed using **TDD (Test-Driven Development)**
+
+For core modules the development followed **a test-first approach**.  
+This allowed us to:
+
+- formalize requirements before writing implementation,
+- reduce hidden defects,
+- safely refactor logic without regression,
+- make tests a living specification of expected behavior.
+
+Tests document how the system should behave, increasing predictability and maintainability.
+
+---
+
+## 3. CQRS REST API Trade-off
+
+Strict CQRS principles state that commands **should not return data**.  
+However, in REST APIs it’s common and convenient to return an identifier of a newly created entity.
+
+### Possible approaches:
+
+1. **Client generates UUID and sends it within the command**  
+   Command returns nothing.
+  + ideal for CQRS
+  + scalable architecture  
+    − requires clients to generate UUIDs
+
+2. **Command returns ID after creation**  
+   A practical compromise for REST.
+  + improves DX and API usability  
+    − slightly violates pure CQRS rules
+
+---
+
+## 4. Why the average rating is stored **both in DB and Redis**
+
+The caching strategy used is **write-through cache**, and storing data twice is an intentional decision.
+
+### Redis is used for reads:
+
+- near-instant lookup,
+- optimized for frequently accessed read-model,
+- enables building top lists without heavy DB queries,
+- avoids DB I/O and locking under load.
+
+### Database is the system of record:
+
+- persistent storage,
+- supports analytics and filtering,
+- does not lose data on cache flush or failover.
+
+Dual-storage improves **performance, reliability, and scalability**.
+
+---
+
+## 5. Planned Improvements
+
+The project currently functions as a working prototype.  
+Below is a roadmap of enhancements for future development.
+
+### A) Reliability and correctness
+
+- Proper HTTP error codes (currently most errors fall into 500)
+- Validation for incoming DTOs/commands
+- Improved logging:
+  - switch to **Monolog with structured context**
+  - JSON logs for ELK/Grafana Loki compatibility
+  - correlation ID per request for traceability
+
+### B) Code quality & maintainability
+
+- Automatic OpenAPI/Swagger generation
+- Increase unit test coverage (target 70%+)
+- Apply static analysis & linters:
+  - PHP: **phpstan/psalm + php-cs-fixer/phpcs**
+  - Node: **eslint** (or **biome** as a modern alternative)
+  - CI enforced pre-commit hooks (**husky + lint-staged**)
+
+### C) DevOps & Infrastructure
+
+- Deploy project into **Kubernetes cluster**
+  - separate scaling for read and write components
+- Observability setup:
+  - Prometheus/Grafana metrics and dashboards
+  - alerting on latency/availability issues
+- Optional split of read model as a standalone microservice
