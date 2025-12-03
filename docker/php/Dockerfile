@@ -46,3 +46,17 @@ RUN docker-php-ext-enable xdebug
 
 RUN apk del .build-deps \
     && rm -rf /var/cache/apk/*
+
+FROM base AS test
+
+COPY composer.json composer.lock ./
+RUN composer install --no-interaction
+
+COPY . .
+
+FROM base AS prod
+
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-interaction --optimize-autoloader
+
+COPY . .
